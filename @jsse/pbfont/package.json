@@ -1,0 +1,75 @@
+{
+  "name": "@jsse/pbfont",
+  "type": "module",
+  "version": "0.2.2",
+  "author": "jessekrubin",
+  "license": "MIT",
+  "homepage": "https://github.com/jessekrubin/pbfont#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jessekrubin/pbfont"
+  },
+  "bugs": {
+    "url": "https://github.com/jessekrubin/pbfont/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "README.md",
+    "dist",
+    "license",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.0.0"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.38.0",
+    "@bufbuild/protoc-gen-es": "^2.0.0",
+    "@changesets/cli": "^2.27.7",
+    "@jsse/eslint-config": "^0.2.7",
+    "@jsse/tsconfig": "^0.1.0",
+    "@types/node": "^22.5.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint": "^9.9.1",
+    "prettier": "~3.3.3",
+    "tsup": "~8.2.4",
+    "tsx": "~4.18.0",
+    "typescript": "~5.5.4",
+    "vitest": "~2.0.5"
+  },
+  "scripts": {
+    "build": "pnpm gen && tsup --dts && tsc",
+    "build-fast": "tsup",
+    "build:tsc": "tsc",
+    "change": "changeset",
+    "check": "eslint . && prettier --check .",
+    "ci:publish": "pnpm publish",
+    "ci:version": "changeset version && pnpm install && pnpm fmt",
+    "release": "changeset version && git add -u && git commit -m \"chore: release\" && git push && git push --tags && pnpm publish",
+    "cov": "vitest run --coverage",
+    "fmt": "prettier --write src/**/*.{js,jsx,ts,tsx} package.json",
+    "fmtc": "prettier --check .",
+    "gen": "npx buf generate proto && pnpm run fmt",
+    "gen:clean": "npx buf generate proto --clean",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "tsc": "tsc -p tsconfig.json",
+    "tsup": "tsup",
+    "typecheck": "tsc --noEmit",
+    "vitest": "vitest --config vitest.config.ts --run",
+    "vitest:watch": "vitest --config vitest.config.ts"
+  }
+}
